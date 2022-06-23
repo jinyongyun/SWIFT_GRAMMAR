@@ -175,6 +175,107 @@ sendMessage(me: "Jinyong", friends: "Jonson", "aiensert", "serius")<br>
 가변 매개변수로 선언되어 있으면 배열을 받을 수 있다고 생각하면 쉽다<br>
 <br>
 스위프트의 함수는 일급 객체이다. 그래서 함수를 변수로 할당 할 수도 있고 매개변수에 집어넣을 수도 있다.<br>
-
-
-
+<br>
+<br>
+![image](https://user-images.githubusercontent.com/102133961/175224652-d1e4cd90-3281-4d28-bd6b-e7ae517d6621.png)<br>
+주어진 조건에 따라 다르게 동작하도록 하는 문<br>
+<br>
+if, switch, guard 문이 있다<br>
+<br>
+import UIKit<br>
+<br>
+/*<br>
+if 조건식 {<br>
+ 실행할 구문<br>
+}<br>
+*/<br>
+<br>
+let age = 12<br>
+<br>
+if age < 19 {<br>
+  print("미성년자 입니다.")<br>
+}<br>
+<br>
+/*<br>
+ if 조건식 {<br>
+  조건식이 만족하면 해당 구문 실행<br>
+} else {<br>
+만족하지 않는다면 해당 구문 실행<br>
+}<br>
+*/<br>
+<br>
+if age < 19 {<br>
+  print("미성년자")<br>
+} else {<br>
+  print("성년자")<br>
+}<br>
+<br>
+/* <br>
+if 조건식1 {<br>
+   // 조건식1을 만족할 때 실행할 구문<br>
+} else if 조건식1 {<br>
+ //조건식2를 만족할 때 실행할 구문<br>
+} else {<br>
+  // 아무 조건식도 만족하지 않을 때 실행할 구문<br>
+}<br>
+*/<br>
+<br>
+let animal = "cat"<br>
+<br>
+if animal == "dog" {<br>
+  print("강아지 사료주기")<br>
+} else if animal == "cat" {<br>
+ print("고양이 사료주기")<br>
+} else {<br>
+  print("해당하는 동물 사료가 없음")<br>
+}<br>
+<br>
+/* <br>
+switch 비교대상 {<br>
+<br>
+case 패턴1:<br>
+  // 패턴1 일치할 때 실행되는 구문<br>
+case 패턴2, 패턴3:<br>
+ // 패턴2, 3가 일치할 때 실행되는 구문<br>
+default:<br>
+ // 어느 비교 패턴과도 일치하지 않을 때 실행되는 구문<br>
+}<br>
+*/<br>
+<br>
+let color = "green"<br>
+<br>
+switch color {<br>
+case " blue":<br>
+  print("파란색 입니다")<br>
+<br>
+case "green":<br>
+  print("초록색 입니다")<br>
+<br>
+case "yellow":<br>
+  print("노랑색 입니다")<br>
+<br>
+default:<br>
+  print("찾는 색상이 없습니다")<br>
+}<br>
+<br>
+<br>
+<br>
+let temperature = 30<br>
+<br>
+switch temperature {<br>
+<br>
+case -20...9:<br>
+ print("겨울 입니다")<br>
+<br>
+case 10...14:<br>
+ print("가을 입니다")<br>
+<br>
+case 15...25<br>
+  print("봄 입니다")<br>
+<br>
+case 26...35<br>
+  print("여름 입니다")<br>
+<br>
+default:<br>
+  print("이상 기후입니다")<br>
+<br>
