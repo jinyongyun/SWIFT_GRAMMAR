@@ -104,3 +104,77 @@ set.insert(30)<br>
 <br>
 set.remove(20)<br>
 
+  ![image](https://user-images.githubusercontent.com/102133961/175221543-996cdcfc-2aab-4193-b7a1-469c2dbaefac.png)
+<br>
+  
+  
+함수는 작업의 가장 작은 단위 그리고 코드의 집합이다<br>
+계속해서 중복되는 코드를 줄이기 위해 사용한다<br>
+<br>
+func 함수명(파라미터 이름: 데이터 타입)->반환타입 {<br>
+return 반환값<br>
+}<br>
+<br>
+func sum(a: Int, b: Int) -> Int {<br>
+<br>
+return a+b<br>
+<br>
+}<br>
+<br>
+sum(a: 5, b: 3)<br>
+<br>
+<br>
+func hello() -> String { //매개변수 없는 함수<br>
+<br>
+return "hello"<br>
+<br>
+}<br>
+<br>
+hello()<br>
+<br>
+func printName() -> Void {<br>
+  // 반환 값 없는 함수<br>
+}<br>
+<br>
+또는<br>
+<br>
+func printName() {<br>
+ // 반환 값 없는 함수 <br>
+}<br>
+<br>
+func greeting(friend: String, me: String = "jinyong"){<br>
+  print("Hello, \(friend)! I'm \(me)")<br>
+}<br>
+<br>
+greeting(friend: "Albert")<br>
+<br>
+//전달인자레이블 사용<br>
+func sendMessage(from myName: String, to name: String) -> String{<br>
+return "Hello \(name)! I'm \(myName)"<br>
+}<br>
+<br>
+sendMessage(from: "Gunter", to: "Json")<br>
+<br>
+//와일드카드(바로 값 넘겨주기)<br>
+<br>
+func sendMessage(_ name: String) -> String {<br>
+return "Hello \(name)"<br>
+<br>
+}<br>
+<br>
+sendMessage("윤진용")<br>
+<br>
+//가변매개변수<br>
+<br>
+func sendMessage(me: String, friends: String. . .) -> String {<br>
+  return "Hello \(friends)! I'm \(me)"<br>
+}<br>
+<br>
+sendMessage(me: "Jinyong", friends: "Jonson", "aiensert", "serius")<br>
+<br>
+가변 매개변수로 선언되어 있으면 배열을 받을 수 있다고 생각하면 쉽다<br>
+<br>
+스위프트의 함수는 일급 객체이다. 그래서 함수를 변수로 할당 할 수도 있고 매개변수에 집어넣을 수도 있다.<br>
+
+
+
