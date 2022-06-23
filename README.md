@@ -279,3 +279,64 @@ case 26...35<br>
 default:<br>
   print("이상 기후입니다")<br>
 <br>
+<br>
+![image](https://user-images.githubusercontent.com/102133961/175230761-77844584-13be-4c7f-81e9-dbbf8c15a19e.png)<br>
+ 반복적으로 코드가 실행되게 만드는 구문<br>
+프로그램을 작성하다 보면 같은 코드를 여러 번 호출해야 하는 경우가 생긴다<br>
+for-in<br>
+while<br>
+repeat-while<br>
+이 있다.<br>
+<br>
+<br>
+/*<br>
+for 루프상수 in 순회대상 {<br>
+  // 실행할 구문...: 코드블럭<br>
+}<br>
+*/<br>
+<br>
+for i in 1...4 {<br>
+print(i)<br>
+}<br>
+<br>
+-> 1,2,3,4 차례대로 출력<br>
+<br>
+let array = [1,2,3,4,5]<br>
+for i in array {<br>
+ print(i)<br>
+}<br>
+<br>
+이렇게 범위 데이터에 배열을 넣을 수 있다<br>
+<br>
+<br>
+/*<br>
+while 조건식 {<br>
+  // 실행할 구문<br>
+<br>
+ }<br>
+*/<br>
+<br>
+var number = 5<br>
+while number < 10 {<br>
+  number+=1<br>
+}<br>
+<br>
+<br>
+<br>
+/*<br>
+ repeat {<br>
+  // 실행할 구문<br>
+ } while 조건식<br>
+*/<br>
+<br>
+var x = 6<br>
+<br>
+repeat {<br>
+x+=2<br>
+} while x < 5<br>
+<br>
+print(x)<br>
+<br>
+->적어도 한 번은 반드시 구문을 실행한다.<br>
+<br>
+
