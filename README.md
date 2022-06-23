@@ -339,4 +339,142 @@ print(x)<br>
 <br>
 ->적어도 한 번은 반드시 구문을 실행한다.<br>
 <br>
+<br>
+![image](https://user-images.githubusercontent.com/102133961/175237335-0b7ec120-2c2b-4cde-a0d5-3ac27f7014ac.png)<br>
+  값이 있을 수도 있고 없을 수도 있다<br>
+(선택적인)<br>
+<br>
+var name: String=""<br>
+이녀석은 값이 있는 걸까 없는 걸까<br>
+<br>
+정확히 말하자면 빈 문자열이라는 값을 갖고 있는 것이다.<br>
+<br>
+값이 없는 경우는 바로<br>
+<br>
+var name: String=nil<br>
+<br>
+이렇게 nil이 되는 것이다<br>
+<br>
+var number:Int? = nil<br>
+<br>
+이 경우도 마찬가지<br>
+<br>
+그렇다고 모든 경우에 nil을 넣을 수 있는 것이 아니라<br>
+<br>
+위의 경우와 같이 값이 있을수도 있고 없을 수도 있는 변수를 정의할 때<br>
+타입 뒤에 ? 물음표를 붙여줘야 nil을 지정해줄 수 있다.<br>
+<br>
+이렇게 정의한 변수를 우리는 철수 아니 옵셔널이라고 부른다<br>
+옵셔널의 경우 기본값은 nil이다<br><br>
+<br>
+일반적인 프로그래밍 언어에서는 값이 nil인 변수에 접근하면 런타임 에러가 발생해 프로그램이 종료된다 하지만 스위프트는 안전성 때문에 특이하게 값이 nil인 변수에 접근해도 프로그램이 종료되지 않는다.<br>
+<br>
+<br>
+<br>
+import UIKit<br>
+<br>
+var name: String?<br>
+<br>
+-> 이거 실행하면 그냥 nil 나옴<br>
+<br>
+그리고 옵셔널 타입에는 일반값도 넣을 수 있다<br>
+<br>
+var optionalName: String? = "Jinyong"<br>
+<br>
+// var requiredName: String = optionalName<br>
+<br>
+이런 경우 에러가 난다. requiredName은 옵셔널이 아닌 String타입이므로 값이 꼭 있어야 하고, optionalName이 옵셔널 타입이므로 이 녀석이 실행되기 전까지 값이 있나 없나를 모르기 때문 <br>
+<br>
+따라서 swift는 안전을 위해 이런 경우를 금지한다<br>
+<br>
+이때 발생하는 에러는 optionalName이라는 변수의 옵셔널 포장지를 벗기라는 에러가 뜨는데<br>
+optionalName변수를 출력해 보면 Optional("Jinyong") 처럼 옵셔널 포장지에 싸여있는 것을 볼 수 있다.<br>
+이 포장지를 벗겨주려면 옵셔널 바인딩을 이용해야만 한다.<br>
+<br>
+![image](https://user-images.githubusercontent.com/102133961/175237404-c47d5a23-93a0-4d45-b523-75f1ebfd5f1c.png)<br>
+옵셔널 해제 방법에는 명시적 해제와 묵시적 해제가 있다<br>
+  <img width="329" alt="image" src="https://user-images.githubusercontent.com/102133961/175237494-2021d5cb-d28d-40ec-9678-a1c32f1142a2.png"><br>
+먼저 명시적 해제하는 두가지 방법부터 알아보도록 하자<br>
+<br>
+import UIKit<br>
+<br>
+var number: Int? = 3<br>
+print(number)<br>
+print(number!)<br>
+<br>
+실행해 보면 <br>
+<br>
+Optional(3)<br>
+3<br>
+<br>
+이렇게 나온다.<br>
+옵셔널 변수에 느낌표를 붙여주면 강제로 옵셔널이 해제된 것을 볼 수 있는데<br>
+이 방법은 상당히 위험하다<br>
+<br>
+옵셔널을 강제 해제 하게 되면, 에러가 발생해 프로그램이 종료될 수도 있다.<br>
+<br>
+그렇다면 조금 더 안전한 방법은 없을까?<br>
+<br>
+옵셔널을 조금 더 안전하게 추출하려면 '비 강제 해제-옵셔널 바인딩'을 하면 된다.<br>
+<br>
+if let result = number {<br>
+  print(result)<br>
+}else{<br><br>
+<br>
+}<br>
+<br>
+옵셔널 타입의 값을 변수 또는 상수로 할당하는 구문이다.<br>
+옵셔널이 벗겨지면 print가 실행되고 옵셔널 추출에 실패하면 else구문이 실행된다<br>
+->그래서 묶어준다고 해서 바인딩이라고 부른다<br>
+옵셔널 바인딩은 guard문으로도 가능한데<br>
+<br>
+func test(){<br>
+  let number: Int? = 5<br>
+  guard let result = number else {return}<br>
+  print(result)<br>
+}<br>
+<br>
+test()<br>
+<br>
+이렇게 하면 추출됨<br>
+<br>
+if를 이용해 옵셔널 바인딩을 하면 옵셔널이 추출된 변수나 상수를 if 블록 내에서만 사용할 수 있지만, guard문으로 옵셔널을 추출하면 <br>guard문 다음 함수 전체 구문에서 사용할 수 있다.<br>
+<br>
+guard문은 guard문 조건을 만족할 때만 guard문을 통과하고(그래서 guard문: 장벽같은 녀석) 만약 통과하지 못한다면 else문으로 나간다(흐름을 종료시킨다) : 이후에 더 자세히 다룰 예정<br>
+<br>
+다음은 묵시적 해제를 이용해 옵셔널을 벗겨볼 것이다.<br>
+<br>
+먼저 컴파일러에 의한 자동해제가 있다<br>
+<br>
+옵셔널 값을 비교연산자를 이용해 다른 값과 비교하면 컴파일러가 자동적으로 옵셔널을 해제시켜주는 것이다.<br>
+<br>
+let value: Int? = 6<br>
+if value == 6 {<br>
+  print("value가 6입니다")<br>
+ } else {<br>
+  print("value가 6이 아닙니다")<br>
+}<br>
+<br>
+-> value가 6입니다<br>
+출력<br>
+<br>
+이처럼 다른 값과 옵셔널 값을 비교해주면 컴파일러가 알아서 해제시켜준다.<br>
+<br>
+마지막으로 묵시적 옵셔널 해제에 대해 알아보자<br>
+묵시적 해제는 옵셔널 타입이지만 값을 사용할 때는 자동으로 옵셔널이 해제된다<br>
+<br>
+let string = "12"<br>
+var stringToInt: Int? = Int(string) //여기서 string 변수가 한글이나 다른 문자일 수도 있어서 이런 경우 nil을 반환하기 때문에 Int(string)의 반환 타입은 옵셔널이다. <br>
+//print(stringToInt + 1)<br>
+<br>
+<br>
+let string = "12"<br>
+var stringToInt: Int! = Int(string) <br>
+print(stringToInt + 1)<br>
+<br>
+이렇게 stringToInt 변수의 타입 뒤에 느낌표를 붙여주게 되면, 묵시적 옵셔널 해제가 일어난다. 타입 뒤에 느낌표가 붙여져 있는 옵셔널 변수는 자동적으로 옵셔널 해제가 일어나 일반값처럼 자유롭게 사용할 수 있다<br>
+<br>
 
+
+
+  
