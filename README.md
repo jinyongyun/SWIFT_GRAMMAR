@@ -27,3 +27,25 @@ var b: Int = 200<br>
 
 예를 들어 핸드폰의 전체 용량은 상수로 설정하고 사용 가능 공간을 변수로 설정한다.<br>
 
+![image](https://user-images.githubusercontent.com/102133961/175221183-e15b2ae1-364a-4945-9a74-a6385458ef4e.png)
+
+Int : 64bit 정수형
+UInt : 부호가 없는 64bit 정수형
+Float: 32bit 부동 소수점 (Float 변수에 정수를 저장해도 자동으로 부동 소수점으로 변환)
+Double : 64bit 부동 소수점
+Bool : true, false 값
+Character : 문자	
+ex)
+var someCharacter : Character = "가"
+
+String : 문자열
+Any: 모든 타입을 자칭하는 키워드(어떤 타입이든 다 가질 수 있다)
+
+스위프트는 타입 추론을 할 수 있다
+
+따라서 변수나 상수명 뒤에 특정 타입을 명시하지 않아도 컴파일러가 알아서 타입을 추론하여 타입을 결정해준다.
+
+var number = 10
+
+그냥 이렇게 써줘도 'Int형 타입이구나' 라고 추론한다
+
