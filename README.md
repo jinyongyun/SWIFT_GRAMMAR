@@ -49,3 +49,58 @@ var number = 10<br>
 <br>
 그냥 이렇게 써줘도 'Int형 타입이구나' 라고 추론한다<br>
 <br>
+
+![image](https://user-images.githubusercontent.com/102133961/175221357-30431e78-bdd1-47b7-b51c-72ac3ff64b84.png)
+<br>
+컬렉션 타입은 데이터들의 집합 또는 묶음이다<br>
+스위프트의 컬렉션 타입에는 크게 Array, Dictionary, Set가 있다.<br>
+Array<br>
+데이터 타입의 값들을 순서대로 지정하는 리스트<br>
+우리가 흔히 아는 배열이다<br>
+<br>
+Dictionary<br>
+키와 값의 쌍으로 데이터를 저장하는 컬렉션 타입<br>
+<br>
+Set<br>
+같은 데이터 타입의 값을 순서 없이 저장하는 리스트<br>
+값 중복 허용 안 함<br>
+그냥 집합이라고 생각하자<br>
+<br>
+자바와 자료구조 시간에 배운 것이기에 세부적인 사항은 넘어간다<br>
+<br>
+import UIKit<br>
+<br>
+var numbers: Array<Int> = Array<Int>()<br>
+numbers.append(1)<br>
+numbers.append(3)<br>
+numbers.append(2)<br>
+<br>
+numbers[0]<br>
+numbers[1]<br>
+numbers.insert(4, at:2) // index 2번에 4를 집어넣음 <br>
+numbers<br>
+numbers.remove(at:0)<br>
+numbers<br>
+<br>
+var names = [String]()<br>
+var names: [String] = []<br>
+<br>
+//var dic: Dictionary<String, Int> = Dictionary<String, Int>()<br>
+var dic: [String: Int] = ["윤진용": 1]<br>
+dic["철수"] = 3<br>
+dic["김지"] = 5<br>
+dic<br>
+<br>
+dic.removeValue(forKey: "김민지")<br>
+<br>
+var set: Set = Set<Int>()<br>
+//set는 축약형 형태가 따로 없다!<br>
+<br>
+set.insert(10)<br>
+set.insert(20)<br>
+set.insert(30)<br>
+set.insert(30)<br>
+set.insert(30)<br>
+<br>
+set.remove(20)<br>
+
