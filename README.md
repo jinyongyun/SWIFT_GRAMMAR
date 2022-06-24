@@ -910,4 +910,61 @@ as?는 다운캐스팅한 값을 옵셔널 타입으로 반환<br>
 그래서 위에서 if let으로 옵셔널 바인딩을 통해 꺼내온 것을 알 수 있다.<br>
 as!는 다운캐스팅한 값을 강제로 unwrapping 해서 반환 : 항상 성공한다는 확신 있으면  사용 (runtime error 방지)<br>
 <br>
-  
+ <br> 
+  ![image](https://user-images.githubusercontent.com/102133961/175516818-0ea53e29-c9ec-4d2a-82d3-c99b8b283a57.png)<br>
+assert<br>
+특정 조건을 체크하고 조건이 성립하지 않으면 메세지를 출력 하게 할 수 있는 함수<br>
+assert함수는 디버깅 모드에서만 동작하고 주로 디버깅 중 조건의 검증을 위하여 사용한다.<br>
+<br>
+guard문<br>
+뭔가를 검사하여 그 다음에 오는 코드를 실행할지 말지 결정 하는 것<br>
+guard문에 주어진 조건문이 거짓일 때 구문이 실행된다.<br>
+<br>
+import Foundation<br>
+<br>
+var value = 0<br>
+assert(value == 0)<br>
+<br>
+value = 2<br>
+assert(value == 0, "값이 0이 아닙니다") //runtime error 발생<br>
+<br>
+<br>
+assertion함수는 특정 조건을 검증하고 조건이 만족하지 않으면 메세지와 함께 error를 발생시키는 함수이기 때문에 runtime error가 발생하는 것<br>
+<br>
+그래서 주로 디버깅 중 조건의 검증을 위해 사용하는 거다<br>
+<br>
+guard문은 주로 잘못된 값이 함수에 들어오는 것을 방지하기 위해 사용한다.<br>
+guard문은 어디서든지 많이 쓰이기 때문에 확실하게 알고 넘어가야 한다<br>
+guard문은 다음과 같은 형태를 띈다<br>
+<br>
+/*<br>
+<br>
+guard 조건 else {<br>
+    // 조건이 false면 else 구문이 실행되고<br>
+  return or throw or break 를 통해 이후 코드를 실행하지 않도록 한다<br>
+     }<br>
+<br>
+*/<br>
+<br>
+func  guardTest(value: Int) {<br>
+ guard value == 0 else { return }<br>
+ print("안녕하세요")<br>
+}<br>
+<br>
+guardTest(value: 2) // 아무것도 실행 안 됨 return<br>
+guardTest(value: 0)<br>
+<br>
+앞에서 잠깐 언급한 적이 있었듯이 guard문으로 옵셔널 바인딩도 할 수 있다.<br>
+<br>
+func  guardTest(value: Int?) {<br>
+ guard let value = value else { return }<br>
+ print(value)<br>
+}<br>
+<br>
+이런 경우에 nil일 때만 else로 나가고<br>
+옵셔널 포장지가 정상적으로 벗겨지면  print 된다.<br>
+<br>
+guardTest(value: 2) // 2<br>
+guardTest(value: nil) // 아무 것도 출력 안 됨<br>
+<br>
+
