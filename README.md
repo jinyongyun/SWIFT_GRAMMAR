@@ -1093,7 +1093,8 @@ string.convertToInt()<br>
 즉 타입 자체에다 기능을 추가하는 것!<br>
 추가로 이니셜라이져 서브스크립트 등을 이용해 기능을 확장할 수도 있다.<br>
 <br>
-열거형![image](https://user-images.githubusercontent.com/102133961/175535181-09295842-61ca-4ef7-8b6b-628267ea0ec4.png)
+열거형
+  ![image](https://user-images.githubusercontent.com/102133961/175535181-09295842-61ca-4ef7-8b6b-628267ea0ec4.png)
 
 <br>
 연관성이 있는 값을 모아 놓은 것<br>
@@ -1198,7 +1199,8 @@ print(company.developer?.name) // 옵셔널 체이닝: 접근한 옵셔널 프�
 print(company.developer!.name) // 옵셔널 체이닝 느낌표로 접근한 옵셔널 프로퍼티 값은 항상 강제 옵셔널 해제되어있다->kan<br>
 <br>
 <br>
-try~catch![image](https://user-images.githubusercontent.com/102133961/175534913-827f1c17-18a1-4d18-a88d-86ac8382ec2d.png)
+try~catch
+  ![image](https://user-images.githubusercontent.com/102133961/175534913-827f1c17-18a1-4d18-a88d-86ac8382ec2d.png)
 
 <br>
 swift에서의 에러 처리 방식<br>
@@ -1262,4 +1264,92 @@ let status2 = try! checkPhoneBatteryStatus(batterylevel: 30)<br>
 print(status2)<br>
 // 오류가 발생하면 runtime error 가 발생해 프로그램이 강제 종료되므로 주의<br>
 <br>
+클로저![image](https://user-images.githubusercontent.com/102133961/175539375-edead086-257c-44a5-8e6c-c06a32673487.png)<br>
+클로저는 코드에서 전달 및 사용할 수 있는 독립 기능 블록이며, 일급 객체의 역할을 할 수 있다.<br>
+여기서 일급 객체란 전달 인자로 보낼 수 있고, 변수, 상수 등으로 저장하거나 전달할 수 있으며 함수의 반환 값이 될 수 있는 객체를 뜻한다.<br>
+보통 클로저라 하면 이름없는 함수 즉 익명함수를 지칭한다.<br>
+unnamed closure 와 named closure(함수) 둘 다 사실 클로저이지만, 보통은 unnamed closure를 우리는 closure라고 한다<br>
+![image](https://user-images.githubusercontent.com/102133961/175539414-dbec0a80-ef2a-4941-9962-7aae0dbfa581.png)<br>
+<img width="201" alt="image" src="https://user-images.githubusercontent.com/102133961/175539444-fd28b0db-6e96-4489-ab4e-cba795964c4d.png"><br>
+클로저는 다음과 같은 형태를 띈다<br>
+노란색 박스 안 부분이 클로저 헤드<br>
+그리고 붉은 박스 안쪽이 클로저 바디영역이다.<br>
+이 둘은 in이라는 키워드에 의해 나누어 진다.<br>
+<br>
+import Foundation<br>
+<br>
+let hello = { () -> () in //파라미터와 리턴 타입 둘 다 없는 경우<br>
+ print("hello")<br>
+}<br>
+<br>
+hello()<br>
+<br>
+클로저의 실행 구문에서 정의한 hello 가 출력된다!<br>
+<br><br>
 
+let hello2 = { (name: String) -> String in<br>
+  return "hello, \(name)" // 주의 클로저에서는 전달 인자 레이블을 사용하지 않는다. 따라서 저녀석은 오직 파라미터 네임일 뿐이다<br>
+}<br>
+<br>
+// hello2(name: "Jinyong") 에러발생<br>
+<br>
+hello2("Jinyong")<br>
+<br>
+<br>
+//클로저를 함수의 파라미터로 전달 가능(일급 객체라 가능)<br>
+<br>
+func doSomething(closure: () -> ()) {<br>
+  closure()<br>
+}<br>
+<br>
+doSomething(closure: { () -> () in<br>
+   print("hello")<br>
+  })<br>
+<br>
+//리턴 타입이 클로저인 경우<br>
+func doSomething2() -> ()  -> () {<br>
+  return { () -> () in<br>
+     print("hello4")<br>
+   }<br>
+}<br>
+<br>
+doSomething2()()<br>
+<br><br>
+
+// 클로저 가독성 좋게 쓰기<br>
+<br>
+func doSomething(closure: () -> ()) {<br>
+  closure()<br>
+}<br>
+<br>
+doSomething(closure: { () -> () in<br>
+   print("hello")<br>
+  })<br>
+<br>
+doSomething() {<br>
+print("hello2")<br>
+//그냥 이렇게 쓴다, 어차피 반환값도 매개값도 없으니 전부 생략, in 도 생략<br>
+}<br>
+<br>
+doSomething 함수처럼 단 하나의 클로저만 매개변수로 전달하는 경우 소괄호도 생략 가능하다<br>
+doSomething {<br>
+print("hello2")<br>
+}<br>
+<br>
+<br>
+매개변수에 클로저가 여러 개 있는 경우 다중 후행 클로저 구문을 사용한다<br>
+<br>
+func doSomething2(success: () -> (), fail: () -> ()) {<br>
+<br>
+}<br>
+<br>
+doSomething2 {<br>
+  code // 첫번째는 매개변수 레이블 생략<br>
+} fail: {<br>
+  code<br>
+}<br>
+<br>
+문법을 최소화 하여 클로저를 단순하게 표현하기<br>
+![image](https://user-images.githubusercontent.com/102133961/175539485-75932944-be8b-4eeb-816d-5163f0c6a03e.png)<br>
+<img width="296" alt="image" src="https://user-images.githubusercontent.com/102133961/175539498-228ab0cd-a5cc-4892-9db9-25dacd0dde6e.png"><br>
+<br>
