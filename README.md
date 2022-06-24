@@ -1173,4 +1173,87 @@ switch error {<br>
      print("알 수 없는 에러입니다")<br>
  }<br>
 <br>
+![image](https://user-images.githubusercontent.com/102133961/175532861-99487406-7f9e-4d1c-99d9-9149d0d642ed.png)<br>
+  옵셔널 체이닝은 옵셔널에 속해있는 nil일지도 모르는 프로퍼티, 메소드, subscription 등을 가져오거나 호출할 때 사용하는 일련의 과정을 뜻한다.<br>
+<br>
+import Foundation<br>
+<br>
+struct Developer {<br>
+  let name: String<br>
+}<br>
+<br>
+struct Company {<br>
+  let name: String<br>
+  var developer: Developer?<br>
+}<br>
+var developer = Developer(name: "kan")<br>
+var company = Company(name: "Jinyong" ,developer: developer)<br>
+print(company.developer) // 옵셔널에 감싸진 kan이 나온다<br>
+print(company.developer.name) // 옵셔널을 해제해야 name 프로퍼티에 접근할 수 있다<br>
+print(company.developer?.name) // 옵셔널 체이닝: 접근한 옵셔널 프로퍼티 값은 항상 옵셔널에 감싸져 있고->Optional("kan")->옵셔널 바인딩을 통해 옵셔널을 언래핑하면 된다<br>
+print(company.developer!.name) // 옵셔널 체이닝 느낌표로 접근한 옵셔널 프로퍼티 값은 항상 강제 옵셔널 해제되어있다->kan<br>
+<br>
+<br>
+![image](https://user-images.githubusercontent.com/102133961/175532968-0665c3e1-b0d1-4383-bffa-99d3b0a3d7d9.png)<br>
+swift에서의 에러 처리 방식<br>
+<br>
+스위프트에서 에러는 에러 프로토콜을 따르는 타입의 값으로 표기된다<br>
+에러 프로토콜을 요구 사항이 없는 빈 프로토콜이지만 오류를 표현하기 위해 이 빈 프로토콜을 채택해야 한다.<br>
+<br>
+스위프트의 열거형은 이런 면에서 해당 오류를 나누고 이에 대한 응답을 나누는 데 굉장히 적합한 구문이다<br>
+<br>
+enum PhoneError: Error {<br>
+   case unknown<br>
+   case batteryLow(batteryLevel: Int)<br>
+}<br>
+<br>
+   throw PhoneError.batteryLow(batteryLevel: 20)<br>
+   <br>
+스위프트의 오류 처리 방식<br>
+1. 함수에서 발생한 오류를 해당 함수를 호출한 곳으로 떠넘기기<br>
+2. do catch 사용해 처리<br>
+3. 옵셔널 값으로 오류 처리<br>
+4. 오류가 발생하지 않는다고 확신!<br>
+<br>
+1번째 방식<br>
+함수 매개변수 뒤에 throws 집어 넣기<br>
+func checkPhoneBatteryStatus(batteryLevel: Int) throws -> String {<br>
+   guard batteryLevel != -1 else { throw PhoneError.unknown }<br>
+   guard batteryLevel > 20 else {throw PhoneError.batteryLow(batteryLevel: 20)}<br>
+   return "배터리 상태가 정상입니다"<br>
+}<br>
+<br>
+2번째 방식<br>
+do catch 사용하기<br>
+<br>
+오류가 던져졌을 때, 그 오류를 처리하는 방식<br>
+<br>
+/<br>
+do {<br>
+  try 오류 발생 가능 코드<br>
+  } catch 오류 패턴 {<br>
+     처리 코드<br>
+  }<br>
+/<br>
+<br>
+do {<br>
+   try checkPhoneBatteryStatus(batteryLevel: -1)<br>
+} catch PhoneError.unknown {<br>
+   print("알 수 없는 에러입니다.")<br>
+} catch PhoneError.batteryLow(let batteryLevel) {<br>
+   print("배터리 전원 부족 남은 배터리: \(batteryLevel)%")<br>
+} catch {<br>
+   print("그 외 오류 발생 : \(error)")<br>
+}<br>
+<br>
+3번째 옵셔널 방식<br>
+let status = try? checkPhoneBatteryStatus(batteryLevel: -1)<br>
+print(status)<br>
+//오류가 발생하면 반환값이 nil<br>
+<br>
+4번째 절대 발생하지 않는다 자신만만하기<br>
+let status2 = try! checkPhoneBatteryStatus(batterylevel: 30)<br>
+print(status2)<br>
+// 오류가 발생하면 runtime error 가 발생해 프로그램이 강제 종료되므로 주의<br>
+<br>
 
