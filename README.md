@@ -594,6 +594,137 @@ deinit {<br>
 그러면 더이상 인스턴스가 필요하지 않다고 판단해<br>
 deinit이 호출된다.<br>
 <br>
+![image](https://user-images.githubusercontent.com/102133961/175483146-ffc15bc5-7e9f-4492-97c7-78ab22426da8.png)<br>
+프로퍼티는 클래스, 또는 열거형 등에 변수처럼 있는 값<br>
+프로퍼티는 세 가지 종류를 가진다<br>
+저장 프로퍼티<br>
+연산 프로퍼티<br>
+타입 프로퍼티<br>
+<br>
+먼저 저장 프로퍼티는 프로퍼티를 사용하는 가장 간단한 방법이다<br>
+struct Dog {<br>
+ var name: String<br>
+ let gender: String<br>
+<br>
+}<br>
+<br>
+var dog = Dog(name:"warwar", gender: " Male")<br>
+print(dog)<br>
+<br>
+이렇게 프로퍼티에 값을 저장시키는 것을 저장 프로퍼티라고 한다<br>
+dog.name = "윤진용"<br>
+let dog2 = Dog(name: "warwar", gender: "Male")<br>
+dog2.name = "윤진용" // 에러 발생<br>
+<br>
+이 경우에는 dog2 즉 인스턴스 변수가 상수로 선언되어 있어서<br>
+프로퍼티 값의 변경이 불가능하다<br>
+<br>
+이러한 결과가 나온 이유는 구조체가 값 타입이기 때문이다.<br>
+구조체 인스턴스를 상수로 선언하면 내부 프로퍼티도 상수화되어 변경이 불가능해진다.<br>
+<br>
+그렇다면 클래스는 어떨까?<br>
+<br>
+클래스는 참조타입이라 구조체와는 조금 다른 결과가 나온다.<br>
+<br>
+클래스 인스턴스는 상수로 선언해도 변수로 선언한 프로퍼티 값을 변경할 수 있다.<br>
+<br>
+class Cat {<br>
+<br>
+var name: String<br>
+let gender: String<br>
+init(name: String, gender: String){<br>
+  self.name = name<br>
+  self.gender = gender<br>
+  }<br>
+}<br>
+<br>
+let cat = Cat(name: "json", gender: "female")<br>
+cat.name = "jonson"<br>
+print(cat.name)<br>
+<br>
+클래스는 참조 타입이기 때문에 인스턴스를 상수로 선언했다 하더라도 내부 변수 타입 프로퍼티 값의 변경이 가능하다. 하지만 당연히 gender같은 상수 타입 프로퍼티는 변경할 수 없다. <br>
+<br>
+다음으로 연산 프로퍼티에 대해 알아보자,<br>
+<br>
+저장 프로퍼티는 구조체와 클래스에서만 사용 가능했지만<br>
+연산 프로퍼티는 열거형에서도 사용할 수 있다.<br>
+<br>
+연산 프로퍼티는 값을 직접적으로 저장하지 않는 대신 getter 와 setter 를 이용해서 값을 직접적으로 접근하고 수정할 수 있다.<br>
+<br>
+struct Stock {<br>
+  var averagePrice: Int<br>
+  var quantity: Int<br>
+  var purchasePrice: Int {<br>
+     get {<br>
+      return averagePrice * quantitiy<br>
+     }<br>
+<br>
+     set(newPrice){<br>
+       averagePrice = newPrice / quantity<br>
+      }<br>
+   }<br>
+}<br>
+<br>
+<br>
+var stock = Stock(averagePrice: 2300, quantity: 3)<br>
+print(stock)<br>
+stock.purchasePrice -> 6900 // get 실행<br>
+stock.purchasePrice = 3000 // set 실행<br>
+stock.averagePrice -> 1000<br>
+<br>
+참고로 set만 지워서 읽기 전용 프로퍼티로 만들 수 있다<br>
+이런 경우 값을 변경할 수 없게 된다<br>
+그리고 set을 설정할 때 매개변수 디폴트 값은 newValue이다<br>
+<br>
+그 다음으로 프로퍼티 옵저버를 살펴보겠다<br>
+<br>
+프로퍼티 옵저버는 프로퍼티 값의 변화를 살펴보고 반응한다.<br>
+<br>
+새로운 값이 기존 값과 같더라도 프로퍼티 옵저버는 실행된다.<br>
+<br>
+프로퍼티가 set될 때마다 호출된다고 보면 된다.<br>
+<br>
+프로퍼티 옵저버는 세 가지 경우에만 사용할 수 있다<br>
+저장 프로퍼티랑 오버라이딩이 된 저장 연산 프로퍼티에서만 사용할 수 있다.<br>
+<br>
+class Account {<br>
+ var credit: Int = 0 {<br>
+  <br>
+  willSet {<br>
+    print("잔액이 \(credit)원에서 \(newValue)원으로 변경될 예정입니다.")<br>
+      }<br>
+   didSet {<br>
+ print("잔액이 \(oldValue)원에서 \(credit)원으로 변경되었습니다.")<<br>
+     }<br>
+  }<br>
+}<br>
+<br>
+var account = Account()<br>
+account.credit = 1000<br>
+->잔액이 0원에서 1000원으로 변경될 예정입니다<br>
+  잔액이 0원에서 1000원으로 변경되었습니다.<br>
+willSet이나 didSet이나 모두 매개변수를 지정할 수 있는데 지정하지 않는다면<br>
+newValue와 oldValue가 디폴트 매개변수가 된다. <br>
+  <br>
+<br>
+마지막으로 타입 프로퍼티는 인스턴스 생성 없이 객체 내 프로퍼티에 접근 할 수 있도록 하는 거다<br>
+<br>
+프로퍼티 타입 자체와 연결하는 것이다.<br>
+저장 프로퍼티와 연산 프로퍼티에서만 사용 가능하다.<br>
+static 키워드를 사용해서 정의한다.<br>
+<br>
+struct SomeStructure {<br>
+  static var storedTypeProperty = "Some value."<br>
+  static var computedTypeProperty: Int {<br>
+   return 1<br>
+  }<br>
+}<br>
+<br>
+static이라 그냥 인스턴스 생성 안하고 바로 타입으로 호출할 수 있다. (전역_)<br>
+SomeStructure.computedTypeProperty<br>
+SomeStructure.storedTypeProperty<br>
+SomeStructure.storedTypeProperty = "hello"<br>
+값도 변경할 수 있다<br>
 
 
 
