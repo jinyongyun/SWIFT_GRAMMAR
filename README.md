@@ -1351,3 +1351,42 @@ doSomething2 {<br>
 
 <img width="296" alt="image" src="https://user-images.githubusercontent.com/102133961/175539498-228ab0cd-a5cc-4892-9db9-25dacd0dde6e.png"><br>
 <br>
+#### 고차함수
+<br>
+다른 함수를 전달 인자로 받거나 함수 실행의 결과를 함수로 반환하는 함수<br>
+스위프트에선 함수가 일급 객체이다<br>
+스위프트에서 제공하는 고차함수에는<br>
+map<br>
+filter<br>
+reduce<br>
+이 세가지가 있다<br>
+<br>
+모두 collection 타입에 구현되어있다.<br>
+<br>
+<br>
+import Foundation<br>
+<br>
+// map<br>
+let numbers = [0,1,2,3]<br>
+let mapArray = numbers.map { (number) -> Int in <br>
+  return number * 2<br>
+}<br>
+print("map \(mapArray)")	<br>
+<br>
+-> [0,2,4,6]<br>
+<br>
+//filter<br>
+let intArray = [10,5,20,13,4]<br>
+let filterArray = intArray.filter { $0 > 5 }<br>
+print("filter \(filterArray)")<br>
+<br>
+//reduce<br>
+let someArray = [1,2,3,4,5]<br>
+let reduceResult = someArray.reduce(0) {<br>
+   (result: Int, element: Int) -> Int in<br>
+   print("\(result) + \(element)")<br>
+   return result + element<br>
+}<br>
+<br>
+print("reduce \(reduceResult)")<br>
+<br>
