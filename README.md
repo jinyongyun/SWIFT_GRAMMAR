@@ -1045,4 +1045,52 @@ class SomeClass: SomeProtocol5 {<br>
 <br>
 클래스가 상속 받을 수 없는 final이면 required 필요 없다<br>
 <br>
+![image](https://user-images.githubusercontent.com/102133961/175522637-7fc39e49-8bcc-436b-a688-beb2a9171a82.png)<br>
+기존의 클래스, 구조체, 열거형, 프로토콜에 새로운 기능을 추가하는 기능<br>
+extension으로 추가할 수 있는 기능<br>
+- 연산 타입 프로퍼티, 연산 인스턴스 프로퍼티<br>
+-타입 메소드/ 인스턴스 메소드<br>
+-이니셜라이저<br>
+-서브 스크립트<br>
+-중첩 타입<br>
+- 특정 프로토콜을 준수할 수 있도록 기능 첨가<br>
+<br>
+import Foundation<br>
+<br>
+/*<br>
+extension SomeType {<br>
+  // 추가 기능<br>
+  }<br>
+*/<br>
+<br>
+extension Int {<br>
+  var isEven: Bool {<br>
+    return self % 2 == 0<br>
+   }<br>
+<br>
+var isOdd: Bool {<br>
+   return self % 2 == 1<br>
+   }<br>
+}<br>
+<br>
+var number = 3<br>
+number.isOdd // ture<br>
+number.isEven // false<br>
+<br>
+참고로 익스텐션은 연산 프로퍼티를 추가할 수 있지만<br>
+저장 프로퍼티는 추가할 수 없다<br>
+또 타입에 정의되어 있는 기존 프로퍼티의 프로퍼티 옵저버를 추가할 수 없다<br>
+<br>
+extension String {<br>
+  func converToInt() -> Int? {<br>
+    return Int(self)<br>
+   }<br>
+}<br>
+<br>
+var string = "0"<br>
+string.convertToInt()<br>
+<br>
+즉 타입 자체에다 기능을 추가하는 것!<br>
+추가로 이니셜라이져 서브스크립트 등을 이용해 기능을 확장할 수도 있다.<br>
+<br>
 
