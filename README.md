@@ -475,6 +475,126 @@ print(stringToInt + 1)<br>
 이렇게 stringToInt 변수의 타입 뒤에 느낌표를 붙여주게 되면, 묵시적 옵셔널 해제가 일어난다. 타입 뒤에 느낌표가 붙여져 있는 옵셔널 변수는 자동적으로 옵셔널 해제가 일어나 일반값처럼 자유롭게 사용할 수 있다<br>
 <br>
 
+![image](https://user-images.githubusercontent.com/102133961/175473934-69dd03b3-a17d-4924-905f-455f8f52845a.png)<br>
+프로퍼티와 메소드를 이용해 구조화된 틀을 만든다<br>
+지겹도록 봐왔다<br>
+<br>
+하나의 새로운 사용자 정의 데이터 타입을 만들어 준다고 생각하면 쉽다<br>
+<br>
+또는 붕어빵 틀을 만든다고 생각하면 쉽다<br>
+<br>
+스위프트에서도 구조체와 클래스 사용 방식도 거의 동일한데<br>
+<br>
+약간의 차이점이 존재한다<br>
+<br>
+클래스의 인스턴스는 참조타입<br>
+구조체의 인스턴스는 값 타입이라는 점이다<br>
+<br>
+struct 구조체 이름 {<br>
+프로퍼티와 메소드<br>
+}<br>
+<br>
+import UIKit<br>
+<br>
+struct User {<br>
+var nickname: String<br>
+var age: Int<br>
+<br>
+func information(){<br>
+print("\(nickname) \(age)")<br>
+  }<br>
+}<br>
+<br>
+var user = User(nickname: "Jinyong", age: 23)  //생성자로 값을 초기화: 디폴트 생성자<br>
+<br>
+user.nickname // 프로퍼티에 접근<br>
+<br>
+user.nickname = "alphago" // 프로퍼티 값 변경<br>
+<br>
+user.information() // 구조체 함수(메소드)에 접근<br>
+<br>
+클래스는 클래스 키워드로 정의한다<br>
+<br>
+class 클래스 이름 {<br>
+  프로퍼티와 메소드<br>
+}<br>
+<br>
+import UIKit<br>
+<br>
+class Dog {<br>
+var name: String = ""<br>
+var age: Int = 0<br>
+<br>
+func introduce(){<br>
+  print("name \(name) age \(age)")<br>
+  }<br>
+}<br>
+<br>
+var dog = Dog() // 인스턴스 생성<br>
+dag.name = "coco"<br>
+dog.age = 3<br>
+dog.age<br>
+<br>
+dog.introduce()<br>
+<br>
+![image](https://user-images.githubusercontent.com/102133961/175474002-aaa9c1bb-2942-442d-ad0a-0bb8c241d1bd.png)<br>
+클래스 구조체 또는 열거형의 인스턴스를 사용하기 위한 초기 과정<br>
+->생성자<br>
+<br>
+프로퍼티 초기화 및 필요한 조정 수행 역할<br>
+<img width="228" alt="image" src="https://user-images.githubusercontent.com/102133961/175474051-3df6d914-8772-46a5-9a03-23091be68cf1.png"><br>
+위 사진에서 user 상수를 실행할 때, init이 호출되어 초기화 구문이 정의되어 있다면 초기화된다.<br>
+<br>
+방식은<br>
+<br>
+init(매개변수: 타입, ...) {<br>
+  // 프로퍼티 초기화<br>
+  // 인스턴스 생성시 필요한 설정을 해주는 코드 작성<br>
+}<br>
+<br>
+ex)<br>
+<br>
+class User {<br>
+<br>
+  var nickname: String<br>
+  var age: Int<br>
+<br>
+  init(nickname: String, age: Int) {<br>
+<br>
+ self.nickname=nickname<br>
+self.age = age <br>
+  }<br>
+<br>
+init(age: Int) {<br>
+  self.nickname = "albert"<br>
+  self.age =age<br>
+  }<br>
+ }<br>
+}	<br>
+<br>
+var user = User(nickname: "jinyong", age: 23)<br>
+user.nickname<br>
+user.age<br>
+<br>
+var user2 = User(age: 27)
+user2.nickname
+user2.age
+<br>
+생성자와 반대되는 소멸자(Deinitializer)도 있다
+<br>
+메모리 정리 및 삭제 기능을 구현할 수 있다<br>
+<br>
+deinit {<br>
+  print("deint user")<br>
+ }<br>
+}<br>
+<br>
+인스턴스가 있어야지 사용가능하다<br>
+인스턴스가 더이상 필요하지 않다면 인스턴스에 nil을 집어넣어라<br>
+그러면 더이상 인스턴스가 필요하지 않다고 판단해<br>
+deinit이 호출된다.<br>
+<br>
+
 
 
   
