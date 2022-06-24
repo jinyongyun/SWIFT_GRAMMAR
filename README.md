@@ -1093,7 +1093,8 @@ string.convertToInt()<br>
 즉 타입 자체에다 기능을 추가하는 것!<br>
 추가로 이니셜라이져 서브스크립트 등을 이용해 기능을 확장할 수도 있다.<br>
 <br>
-![image](https://user-images.githubusercontent.com/102133961/175528400-0c472843-b210-480d-b1e2-9aaddd1c1fe5.png)<br>
+![image](https://user-images.githubusercontent.com/102133961/175534078-30845eae-e309-4d59-a799-678a438e9b37.png)
+<br>
 연관성이 있는 값을 모아 놓은 것<br>
 import Foundation<br>
 <br>
@@ -1173,7 +1174,8 @@ switch error {<br>
      print("알 수 없는 에러입니다")<br>
  }<br>
 <br>
-![image](https://user-images.githubusercontent.com/102133961/175532861-99487406-7f9e-4d1c-99d9-9149d0d642ed.png)<br>
+![image](https://user-images.githubusercontent.com/102133961/175533934-d0017ee9-b0a6-436d-b0e2-58186d98472d.png)
+<br>
   옵셔널 체이닝은 옵셔널에 속해있는 nil일지도 모르는 프로퍼티, 메소드, subscription 등을 가져오거나 호출할 때 사용하는 일련의 과정을 뜻한다.<br>
 <br>
 import Foundation<br>
@@ -1194,7 +1196,8 @@ print(company.developer?.name) // 옵셔널 체이닝: 접근한 옵셔널 프�
 print(company.developer!.name) // 옵셔널 체이닝 느낌표로 접근한 옵셔널 프로퍼티 값은 항상 강제 옵셔널 해제되어있다->kan<br>
 <br>
 <br>
-![image](https://user-images.githubusercontent.com/102133961/175532968-0665c3e1-b0d1-4383-bffa-99d3b0a3d7d9.png)<br>
+![image](https://user-images.githubusercontent.com/102133961/175533762-0fa04bc8-72b3-4903-be85-d377309d2bc5.png)
+<br>
 swift에서의 에러 처리 방식<br>
 <br>
 스위프트에서 에러는 에러 프로토콜을 따르는 타입의 값으로 표기된다<br>
