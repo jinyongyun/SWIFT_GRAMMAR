@@ -847,6 +847,67 @@ print("AutomaticCar: \(automatic.description)")<br>
 <br>
 마지막으로 프로퍼티나 메소드 앞에 final 키워드를 붙이게 되면 그 대상은 상속 후 재정의 할 수 없게 된다.<br>
 클래스를 정의할 때도 클래스 키워드 앞에 final를 앞에 붙여주면 상속할 수 없게 된다<br>
+<br><br>
+![image](https://user-images.githubusercontent.com/102133961/175493762-4b8c41dd-c10c-4546-bfed-00ea6bf5e954.png)<br>
+인스턴스의 타입을 확인하거나 어떠한 클래스의 인스턴스를 해당 클래스 계층 구조상의 슈퍼 클래스나 서브 클래스로 변환하는 것<br>
 <br>
-
+스위프트에서는 타입 캐스팅을 is 와 as 라는 연산자를 사용해서 수행한다<br>
+<br>
+import Foundation<br>
+<br>
+ class mediaItem {<br>
+   var name: String <br>
+   init(name: String) {<br>
+    self.name = name<br>
+    }<br>
+ }<br>
+<br>
+ class Movie: MediaItem {<br>
+   var director: String<br>
+ init(name: String, director: String) {<br>
+   self.director = director<br>
+   super.init(name: name)<br>
+   }<br>
+}<br>
+<br>
+class Song: MediaItem {<br>
+  var artist: String<br>
+  init(name: String, artist:String) {<br>
+   self.artist = artist<br>
+   super.init(name: name)<br>
+    }<br>
+<br>
+let library = [ // library는 mediaItem 배열로 타입추론<br>
+  Movie(name: "기생충", director: "봉준호"),<br>
+  Song(name: "Butter", artist: "BTS"),<br>
+  Movie(name: "올드보이", director: "박찬욱"),<br>
+  Song(name: "Wonderwall", artist: "Oasis"),<br>
+  Song(name: "Rain", artist: "이적")<br>
+]<br>
+<br>
+var movieCount = 0<br>
+var songCount = 0<br>
+<br>
+for item in library {<br>
+  if item is Movie {<br>
+     movieCount += 1<br>
+  } else if item is Song {<br>
+    songCount += 1<br>
+   }<br>
+}<br>
+<br>
+print("Media library contains \(movieCount) movies and \(songCount) songs")<br>
+<br>
+for item in library {<br>
+   if let movie = item as? Movie {<br>
+    print("Movie: \(movie.name). dir. \(movie.director)")<br>
+} else if let song = item as? Song {<br>
+    print("Song: \(song.name), by \(song.artist)")<br>
+   }<br>
+}<br>
+<br>
+as?는 다운캐스팅한 값을 옵셔널 타입으로 반환<br>
+그래서 위에서 if let으로 옵셔널 바인딩을 통해 꺼내온 것을 알 수 있다.<br>
+as!는 다운캐스팅한 값을 강제로 unwrapping 해서 반환 : 항상 성공한다는 확신 있으면  사용 (runtime error 방지)<br>
+<br>
   
