@@ -967,4 +967,82 @@ func  guardTest(value: Int?) {<br>
 guardTest(value: 2) // 2<br>
 guardTest(value: nil) // 아무 것도 출력 안 됨<br>
 <br>
+![image](https://user-images.githubusercontent.com/102133961/175520826-cf7de928-1788-4e77-938a-06e89ef23af3.png)<br>
+  프로토콜은 특정 역할을 하기 위한 청사진이다.<br>
+<br>
+import Foundation<br>
+<br>
+/*<br>
+protocol 이름 {<br>
+<br>
+}<br>
+<br>
+*/<br>
+<br>
+protocol SomeProtocol {<br>
+<br>
+<br>
+}<br>
+<br>
+protocol SomeProtocol2 {<br>
+<br>
+<br>
+}<br>
+<br>
+struct someStructure: SomeProtocol, SomeProtocol2 {<br>
+<br>
+}<br>
+<br>
+이때 주의해야 할 점은 클래스는 상속이 먼저 나오고 그 다음 프로토콜을 작성한다<br>
+<br>
+<br>
+<br>
+/*<br>
+class SomeClass: SomeSuperclass, FirstProtocol, AnotherProtocol {<br>
+<br>
+<br>
+}<br>
+*/<br>
+<br>
+protocol FirstProtocol {<br>
+ var name: Int { get set }<br>
+ var age: Int { get }<br>
+ }<br>
+<br>
+protocol AnotherProtocol {<br>
+  static var someTypeProperty: Int { get set }<br>
+  func printFullName()<br>
+}<br>
+<br>
+protocol FullyNames {<br>
+  var fullName: String { get set }<br>
+ func printFullName(){<br>
+     print(fullName)<br>
+   }<br>
+}<br>
+<br>
+struct Person: FullyNames {<br>
+ var fullName:String<br>
+}<br>
+<br>
+protocol SomeProtocol3 {<br>
+  func someTypeMethod()<br>
+}<br>
+<br>
+protocol SomeProtocol4 {<br>
+  init(someParameter: Int)<br>
+ }<br>
+<br>
+ protocol SomeProtocol5 {<br>
+  init()<br>
+}<br>
+<br>
+class SomeClass: SomeProtocol5 {<br>
+ required Init() { // 구조체는 따로 required 식별자 필요 없다 오직 클래스에서 init을 채택할 때  <br>                
+<br>
+  }<br>
+}<br>
+<br>
+클래스가 상속 받을 수 없는 final이면 required 필요 없다<br>
+<br>
 
