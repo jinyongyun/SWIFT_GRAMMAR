@@ -1093,7 +1093,7 @@ string.convertToInt()<br>
 즉 타입 자체에다 기능을 추가하는 것!<br>
 추가로 이니셜라이져 서브스크립트 등을 이용해 기능을 확장할 수도 있다.<br>
 <br>
-####열거형
+#### 열거형
 
 <br>
 연관성이 있는 값을 모아 놓은 것<br>
@@ -1175,7 +1175,7 @@ switch error {<br>
      print("알 수 없는 에러입니다")<br>
  }<br>
 <br>
-옵셔널 체이닝![image](https://user-images.githubusercontent.com/102133961/175535077-c605f68e-cf75-4316-9514-5dd81e41a008.png)
+#### 옵셔널 체이닝
 
 <br>
   옵셔널 체이닝은 옵셔널에 속해있는 nil일지도 모르는 프로퍼티, 메소드, subscription 등을 가져오거나 호출할 때 사용하는 일련의 과정을 뜻한다.<br>
@@ -1198,7 +1198,7 @@ print(company.developer?.name) // 옵셔널 체이닝: 접근한 옵셔널 프�
 print(company.developer!.name) // 옵셔널 체이닝 느낌표로 접근한 옵셔널 프로퍼티 값은 항상 강제 옵셔널 해제되어있다->kan<br>
 <br>
 <br>
-####try~catch
+#### try~catch
 
 <br>
 swift에서의 에러 처리 방식<br>
@@ -1262,7 +1262,7 @@ let status2 = try! checkPhoneBatteryStatus(batterylevel: 30)<br>
 print(status2)<br>
 // 오류가 발생하면 runtime error 가 발생해 프로그램이 강제 종료되므로 주의<br>
 <br>
-####클로저
+#### 클로저
 클로저는 코드에서 전달 및 사용할 수 있는 독립 기능 블록이며, 일급 객체의 역할을 할 수 있다.<br>
 여기서 일급 객체란 전달 인자로 보낼 수 있고, 변수, 상수 등으로 저장하거나 전달할 수 있으며 함수의 반환 값이 될 수 있는 객체를 뜻한다.<br>
 보통 클로저라 하면 이름없는 함수 즉 익명함수를 지칭한다.<br>
