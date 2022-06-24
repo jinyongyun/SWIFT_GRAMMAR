@@ -725,7 +725,49 @@ SomeStructure.computedTypeProperty<br>
 SomeStructure.storedTypeProperty<br>
 SomeStructure.storedTypeProperty = "hello"<br>
 값도 변경할 수 있다<br>
-
-
+<br>
+![image](https://user-images.githubusercontent.com/102133961/175485764-e08fd9d1-6b72-4bc6-a7e1-68f7df0c64f9.png)<br>
+클래스와 구조체는 문법과 사용 방법이 거의 동일하다.<br>
+공통점으로는<br>
+프로퍼티를 선언할 수 있고<br>
+메소드도 선언할 수 있고<br>
+. 연산자를 사용해 내부 값에 접근할 수 있다<br>
+생성자(init)을 이용해 초기 상태를 설정할 수 있으며<br>
+extension을 사용해 기능을 확장할 수 있다.<br>
+Protocol을 채택해 기능을 설정할 수도 있다.<br>
+많은 공통점도 있는 반면에<br>
+하지만 명확한 차이점도 있다.<br>
+클래스는 참조타입이지만 구조체는 값 타입이다.<br>
+클래스는 참조타입이기 때문에 메모리 스택 영역에는 포인터, 즉 인스턴스의 메모리 주소만 할당이 되고 실제 데이터는 힙 영역에 할당이 된다.<br> 힙 영역에 데이터가 저장되기 때문에 ARC로 메모리가 관리된다. <br>
+또 상속이 가능하고, 타입 캐스팅을 사용해 런타임 환경에서 클래스 인스턴스의 타입을 확인할 수도 있다. deinit을 사용해 클래스 인스턴스의 메모리 할당을 해제할 수도 있으며 같은 클래스 인스턴스를 여러 개의 변수에 발당한 뒤 값을 변경시키면 모든 변수에 메모리가 복사되어 있기 때문에(참조 값이라) 모든 변수에 전부 영향을 준다.<br>
+하지만 구조체는 구조체 변수를 새로운 변수에 할당할 때마다 완전히 새로운 구조체가 할당이 되고(값 타입이라 스택 영역에 직접 값이 저장) 따라서 구조체를 여러 개의 변수에 할당한 뒤 값을 변경시키더라도 다른 변수에 영향을 주지 않는다. (값 자체를 복사해 버리기 때문)<br>
+<br>
+import Foundation<br>
+<br>
+class SomeClass {<br>
+  var count: Int = 0<br>
+  }<br>
+<br>
+struct someStruct {<br>
+  var count: Int = 0<br>
+  }<br>
+<br>
+ var class1 = SomeClass()<br>
+ var class2 = class1<br>
+ var class3 = class1<br>
+ <br>
+ class3.count = 2<br>
+ class1.count // class1의 count가 2로 변경된 것을 확인할 수 있다.<br>
+<br>
+ var struct1 = SomeStruct()<br>
+ var struct2 = struct1<br>
+ var struct3 = struct1<br>
+<br>
+ struct3.count = 3<br>
+ struct2.count = 4<br>
+ struct1.count   //0<br>
+ struct2.count   //4<br>
+ struct3.count   //3<br>
+<br>
 
   
