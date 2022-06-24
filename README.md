@@ -769,5 +769,84 @@ struct someStruct {<br>
  struct2.count   //4<br>
  struct3.count   //3<br>
 <br>
+![image](https://user-images.githubusercontent.com/102133961/175490495-6393edc6-ea49-42ef-867a-2aa91e107e92.png)<br>
+부모가 자식에게 메소드 프로퍼티 등의 속성을 상속해 주는 것<br>
+부모클래스(슈퍼클래스) --> 자식클래스<br>
+오버라이딩을 통해 물려받은 각종 메소드를 자신 고유의 내용으로 재정의 할 수 있다.<br>
+<br>
+import Foundation<br>
+<br>
+class Vehicle {<br>
+ var currentSpeed = 0.0<br>
+ var description: String {<br>
+  return "traveling at \(currentSpeed) miles per hour"<br>
+  }<br>
+ func makeNoise(){<br>
+  print("스피커가 on 되었습니다")<br>
+ }<br>
+} // 베이스 클래스<br>
+<br>
+//서브 클래스<br>
+class Bicycle: vehicle {<br>
+  var hasBasket = false<br>
+}<br>
+<br>
+var bicycle = Bicycle()<br>
+bicycle.currentSpeed<br>
+bicycle.currentSpeed = 15.0<br>
+bicycle.currentSpeed <br>
+<br>
+//overriding<br>
+<br>
+class Train: Vehicle {<br>
+  override func makeNoise() {<br>
+ super.makeNoise() // Vehicle 클래스의 makeNoise 메소드 호출<br>
+   print("choo choo")<br>
+  }<br>
+}<br>
+<br>
+let train = Train()<br>
+train.makeNoise()<br>
+<br>
+//프로퍼티 재정의->프로퍼티의 getter setter 옵저버를 재정의하는 것<br>
+<br>
+class Car: Vehicle {<br>
+ var gear = 1<br>
+ override var description: String {<br>
+  return super.description + "in gear \(gear)"<br>
+   }<br>
+ <br>
+}<br>
+<br>
+let car = Car()<br>
+car.currentSpeed = 30.0<br>
+car.gear = 2<br>
+print(car.description)<br>
+<br>
+추가로 연산 프로퍼티를 오버라이딩 한 프로퍼티는 getter 와 setter를 가질 수 있다.<br>
+자식 클래스에서 재정의 하려는 프로퍼티는 슈퍼 클래스의 이름과 타입이 일치해야 한다.<br>
+<br>
+슈퍼 클래스에서 readonly로 선언된 프로퍼티를 자식 클래스에서 read write 프로퍼티로 선언할 수 없지만<br>
+반대로 슈퍼 클래스에서 read write 프로퍼티로 선언된 프로퍼티를 자식 클래스에서 readonly 프로퍼티로 재정의 할 수 있다.<br>
+<br>
+<br>
+class AutomaticCar: Car {<br>
+ override var currentSpeed: Double {<br>
+  didSet {<br>
+   gear = Int(currentSpeed / 10) + 1<br>
+     }<br>
+   }<br>
+}<br>
+<br>
+let automatic = AutomaticCar()<br>
+automatic.currentSpeed = 35.0<br>
+print("AutomaticCar: \(automatic.description)")<br>
+<br>
+상수 저장 프로퍼티나 readonly 연산 프로퍼티는 옵저버를 추가할 수 없는데<br>
+이는 둘 다 값을 설정할 수 없기 때문에 willSet이나 didSet을 사용할 수 없기 때문이다.<br>
+<br>
+마지막으로 프로퍼티나 메소드 앞에 final 키워드를 붙이게 되면 그 대상은 상속 후 재정의 할 수 없게 된다.<br>
+클래스를 정의할 때도 클래스 키워드 앞에 final를 앞에 붙여주면 상속할 수 없게 된다<br>
+<br>
 
   
