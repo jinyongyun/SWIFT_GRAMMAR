@@ -1093,4 +1093,84 @@ string.convertToInt()<br>
 즉 타입 자체에다 기능을 추가하는 것!<br>
 추가로 이니셜라이져 서브스크립트 등을 이용해 기능을 확장할 수도 있다.<br>
 <br>
+![image](https://user-images.githubusercontent.com/102133961/175528400-0c472843-b210-480d-b1e2-9aaddd1c1fe5.png)<br>
+연관성이 있는 값을 모아 놓은 것<br>
+import Foundation<br>
+<br>
+enum CompassPoint {<br>
+   case north<br>
+   case south<br>
+   case east<br>
+   case west<br>
+}<br>
+<br>
+또는<br>
+<br>
+enum CompassPoint {<br>
+   case north,south,east,west<br>
+}<br>
+처럼 한 줄로 작성할 수도 있다.<br>
+ 열거형은 하나의 새로운 타입처럼 사용할 수 있다.<br>
+그래서 클래스 처럼 스위프트의 이름 규칙에 따라 열거형의 첫문자를 대문자로 시작해야 한다<br>
+<br>
+var direction = CompassPoint.east<br>
+direction = .west<br>
+switch direction {<br>
+case .north:<br>
+   print("north")<br>
+<br>
+case .south:<br>
+   print("south")<br>
+<br>
+case .east:<br>
+   print("east")<br>
+<br>
+case .west:<br>
+    print("west")<br>
+}<br>
+//원시값으로 초기화하기<br>
+<br>
+enum CompassPoint: String {<br>
+   case north = "북"<br>
+   case south = "남"<br>
+   case east = "동"<br>
+   case west = "서"<br>
+}<br>
+// rawValue 프로퍼티로 초기값 사용<br>
+switch direction {<br>
+case .north:<br>
+   print(direction.rawValue)<br>
+<br>
+case .south:<br>
+   print(direction.rawValue)<br>
+<br>
+case .east:<br>
+   print(direction.rawValue)<br>
+<br>
+case .west:<br>
+    print(direction.rawValue)<br>
+}<br>
+<br>
+//생성자로 생성하기<br>
+let direction2 = CompassPoint(rawValue: "남")<br>
+<br>
+// 연관값 설정하기<br>
+enum phoneError {<br>
+ case unknown<br>
+ case batteryLow(String)<br>
+}<br>
+<br>
+let error = PhoneError.batteryLow("배터리가 곧 방전됩니다.")<br>
+//batteryLow("배터리가 곧 방전됩니다") 출력<br>
+<br>
+연관값을 추출하려면 if case 또는 switch 문 사용<br>
+<br>
+switch error {<br>
+  case .batteryLow(let message):<br>
+      print(message)<br>
+<br>
+  case .unknown:<br>
+     print("알 수 없는 에러입니다")<br>
+ }<br>
+<br>
 
